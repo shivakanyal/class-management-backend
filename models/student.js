@@ -33,8 +33,8 @@ const Student = sequelize.define(
   }
 );
 
-Student.sync()
-  .then((res) => console.log("The table for the Student model is created!"))
-  .catch((err) => console.log(err));
+// Student.sync()
+//   .then((res) => console.log("The table for the Student model is created!"))
+//   .catch((err) => console.log(err));
 
 module.exports = Student;

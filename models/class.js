@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/sequelize");
 
 const Class = sequelize.define(
@@ -26,6 +26,7 @@ const Class = sequelize.define(
         model: "Teacher",
         key: "teacherId",
       },
+      allowNull: true,
     },
   },
   {
@@ -34,8 +35,8 @@ const Class = sequelize.define(
   }
 );
 
-Class.sync()
-  .then((res) => console.log("The table for the Class model is created!"))
-  .catch((err) => console.log(err));
+// Class.sync()
+//   .then((res) => console.log("The table for the Class model is created!"))
+//   .catch((err) => console.log(err));
 
 module.exports = Class;

@@ -33,8 +33,8 @@ const Teacher = sequelize.define(
   }
 );
 
-Teacher.sync()
-  .then((res) => console.log("The table for the Teacher model is created!"))
-  .catch((err) => console.log(err));
+// Teacher.sync()
+//   .then((res) => console.log("The table for the Teacher model is created!"))
+//   .catch((err) => console.log(err));
 
 module.exports = Teacher;
