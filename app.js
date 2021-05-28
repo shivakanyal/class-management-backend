@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 const classRoutes = require("./routes/class");
 const teacherRoutes = require("./routes/teacher");
+const studentRoutes = require("./routes/student");
 
 require("./db/sequelize");
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use(classRoutes);
 app.use(teacherRoutes);
+app.use(studentRoutes);
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log("port is running on port " + PORT);
