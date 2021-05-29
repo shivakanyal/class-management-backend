@@ -8,10 +8,16 @@ const StudentClass = sequelize.define(
   {},
   { timestamps: false }
 );
-Student.belongsToMany(Class, { through: StudentClass });
-Class.belongsToMany(Student, { through: StudentClass });
+Student.belongsToMany(Class, {
+  through: StudentClass,
+  foreignKey: "studentId",
+});
+Class.belongsToMany(Student, {
+  through: StudentClass,
+  foreignKey: "classId",
+});
 
-// StudentClass.sync()
+// StudentClass.sync({ force: true })
 //   .then((res) =>
 //     console.log("The table for the StudentClass model is created!")
 //   )

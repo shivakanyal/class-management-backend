@@ -20,12 +20,8 @@ const Class = sequelize.define(
     endTime: {
       type: DataTypes.STRING,
     },
-    teacherId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "Teacher",
-        key: "teacherId",
-      },
+    teacherName: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
@@ -35,7 +31,7 @@ const Class = sequelize.define(
   }
 );
 
-// Class.sync()
+// Class.sync({ force: true })
 //   .then((res) => console.log("The table for the Class model is created!"))
 //   .catch((err) => console.log(err));
 
