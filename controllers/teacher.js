@@ -35,7 +35,7 @@ exports.addTeacher = async (req, res) => {
       role,
       password: hashedpassword,
     });
-    const token = createToken(name, email, role);
+    const token = createToken(teacher.teacherId, name, email, role);
     return res.send({
       message: "teacher is created Successfully",
       teacher,
@@ -60,7 +60,12 @@ exports.login = async (req, res) => {
     if (!isEqual) {
       return res.send({ message: "email or password is incorrect" }).code(401);
     }
-    const token = createToken(teacher.name, email, teacher.role);
+    const token = createToken(
+      teacher.teacherId,
+      teacher.name,
+      email,
+      teacher.role
+    );
     return res.send({ message: "teacher is logged in", token }).code(200);
   } catch (error) {
     return res.send({ message: error.message }).status(500);
