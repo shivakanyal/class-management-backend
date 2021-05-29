@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const { createToken } = require("../utils/createToken");
 const Student = require("../models/student");
 const Class = require("../models/class");
+const StudentClass = require("../models/studentClass");
 
 exports.getStudent = async (req, res) => {
   try {

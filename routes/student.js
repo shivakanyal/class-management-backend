@@ -6,7 +6,7 @@ const router = express.Router();
 
 const studentController = require("../controllers/student");
 
-router.post("/api/student", auth, studentController.addStudent);
+router.post("/api/student", studentController.addStudent);
 
 router.get("/api/student/:id", studentController.getStudent);
 

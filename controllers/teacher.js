@@ -2,6 +2,8 @@ const bcrypt = require("bcryptjs");
 const { createToken } = require("../utils/createToken");
 
 const Teacher = require("../models/teacher");
+const Class = require("../models/class");
+const Student = require("../models/student");
 
 exports.getTeacher = async (req, res) => {
   try {
@@ -60,6 +62,26 @@ exports.login = async (req, res) => {
     }
     const token = createToken(teacher.name, email, teacher.role);
     return res.send({ message: "teacher is logged in", token }).code(200);
+  } catch (error) {
+    return res.send({ message: error.message }).status(500);
+  }
+};
+
+exports.getAllRegisteredStudent = async (req, res) => {
+  try {
+    const classId = 1 || req.user.id;
+    const result = await Class.findByPk(classId, {
+      include: [
+        {
+          model: Student,
+          attributes: ["studentId", "name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    return res.send(result).status(200);
   } catch (error) {
     return res.send({ message: error.message }).status(500);
   }
