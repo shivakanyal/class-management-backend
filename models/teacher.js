@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const { sequelize } = require("../db/sequelize");
+const Class = require("./class");
 
 const Teacher = sequelize.define(
   "Teacher",
@@ -26,6 +27,10 @@ const Teacher = sequelize.define(
       type: DataTypes.STRING,
       defaultValue: "teacher",
     },
+    className: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     timestamps: false,
@@ -33,7 +38,8 @@ const Teacher = sequelize.define(
   }
 );
 
-// Teacher.sync()
+Teacher.belongsTo(Class, { foreignKey: "classId", allowNull: false });
+// Teacher.sync({ force: true })
 //   .then((res) => console.log("The table for the Teacher model is created!"))
 //   .catch((err) => console.log(err));
 

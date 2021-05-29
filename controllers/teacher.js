@@ -4,6 +4,7 @@ const { createToken } = require("../utils/createToken");
 const Teacher = require("../models/teacher");
 const Class = require("../models/class");
 const Student = require("../models/student");
+const StudentClass = require("../models/studentClass");
 
 exports.getTeacher = async (req, res) => {
   try {
@@ -24,6 +25,8 @@ exports.addTeacher = async (req, res) => {
     const email = req.body.email;
     const role = req.body.role;
     const password = req.body.password;
+    const className = req.body.className;
+    const classId = req.body.classId;
     let teacher = await Teacher.findOne({ where: { email: email } });
     if (teacher) {
       return res.send({ message: "teacher is already present" }).code(401);
@@ -34,6 +37,8 @@ exports.addTeacher = async (req, res) => {
       email,
       role,
       password: hashedpassword,
+      className,
+      classId,
     });
     const token = createToken(teacher.teacherId, name, email, role);
     return res.send({
@@ -90,4 +95,12 @@ exports.getAllRegisteredStudent = async (req, res) => {
   } catch (error) {
     return res.send({ message: error.message }).status(500);
   }
+};
+
+exports.deleteStudent = async (req, res) => {
+  const studentId = req.params.studentId;
+  const nclass = await Class.findOne({ where: { classId: 1 } });
+  const student = await Student.findOne({ where: { studentId } });
+  const result = await student.removeClass(nclass);
+  return res.send({ message: "he he he", result }).status(200);
 };

@@ -15,4 +15,9 @@ router.get("/api/teacher/:id", teacherController.getTeacher);
 
 router.post("/api/teacher/login", teacherController.login);
 
+router.delete(
+  "/api/teacher/student/:studentId",
+  teacherController.deleteStudent
+);
+
 module.exports = router;
